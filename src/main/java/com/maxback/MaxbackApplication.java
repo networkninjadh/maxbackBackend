@@ -9,8 +9,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import com.maxback.models.User;
-import com.maxback.repositories.UserRepository;
+import com.maxback.security.ApplicationUserRole;
+import com.maxback.security.models.User;
+import com.maxback.security.repositories.UserRepository;
+
 
 @SpringBootApplication
 public class MaxbackApplication implements CommandLineRunner{
@@ -18,7 +20,7 @@ public class MaxbackApplication implements CommandLineRunner{
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 	@Autowired
-	private UserRepository userRepository; 
+	UserRepository users;
 	
 	public static void main(String[] args) {
 		SpringApplication.run(MaxbackApplication.class, args);
@@ -27,11 +29,16 @@ public class MaxbackApplication implements CommandLineRunner{
 	@Override
 	public void run(String... args) throws Exception {
 		
-		User me = new User();
-		me.setUsername("networkninjadh");
-		me.setPassword(passwordEncoder.encode("papayaland"));
-		userRepository.save(me);
-		
+		User userTwoUser = User.builder()
+				.username("admin")
+				.password(passwordEncoder.encode("password"))
+				.role("ROLE_" + ApplicationUserRole.ADMIN.name())
+				.isAccountNonExpired(true)
+				.isAccountNonLocked(true)
+				.isCredentialsNonExpired(true)
+				.isEnabled(true)
+				.build();
+		this.users.save(userTwoUser);
 	}
 
 }
