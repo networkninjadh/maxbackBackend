@@ -14,9 +14,9 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
  *
  */
 public enum ApplicationUserRole {
-	ADMIN(Sets.newHashSet(STORE_READ, STORE_WRITE)),
-	EMPLOYEE(Sets.newHashSet()),
-	CUSTOMER(Sets.newHashSet());
+	ADMIN(Sets.newHashSet(ADMIN_READ, ADMIN_WRITE, EMPLOYEE_READ, EMPLOYEE_WRITE, CUSTOMER_READ, CUSTOMER_WRITE)),
+	EMPLOYEE(Sets.newHashSet(EMPLOYEE_READ, EMPLOYEE_WRITE)),
+	CUSTOMER(Sets.newHashSet(CUSTOMER_READ, CUSTOMER_WRITE));
 
 	private final Set<ApplicationUserPermission> permissions;
 	

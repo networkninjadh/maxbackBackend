@@ -70,16 +70,22 @@ class SecurityConfig extends WebSecurityConfigurerAdapter {
 			/**
 			 * Authentication for store api
 			 */
-			.antMatchers(HttpMethod.DELETE, "/test").hasAuthority(ApplicationUserPermission.STORE_WRITE.getPermission())
-			.antMatchers(HttpMethod.GET, "/test").hasAuthority(ApplicationUserPermission.STORE_READ.getPermission())
-			.antMatchers(HttpMethod.POST, "/test").hasAuthority(ApplicationUserPermission.STORE_WRITE.getPermission())
-			.antMatchers(HttpMethod.PUT, "/test").hasAuthority(ApplicationUserPermission.STORE_WRITE.getPermission())
+			.antMatchers(HttpMethod.DELETE, "/test").hasAuthority(ApplicationUserPermission.ADMIN_WRITE.getPermission())
+			.antMatchers(HttpMethod.GET, "/test").hasAuthority(ApplicationUserPermission.ADMIN_READ.getPermission())
+			.antMatchers(HttpMethod.POST, "/test").hasAuthority(ApplicationUserPermission.ADMIN_WRITE.getPermission())
+			.antMatchers(HttpMethod.PUT, "/test").hasAuthority(ApplicationUserPermission.ADMIN_WRITE.getPermission())
 			.antMatchers(
+					"/swagger-resources/**",
+					"/v2/api-docs",
+					"/swagger-ui.html",
                     "/configuration/ui",
                     "/configuration/security",
                     "/webjars/**",
                     "/auth-api/signin",
-                    "/mappings"
+                    "/auth-api/register",
+                    "/mappings",
+                    "/storage/**",
+                    "/"
 					)
 			.permitAll()
 			.anyRequest()

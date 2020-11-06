@@ -7,8 +7,12 @@ package com.maxback.security;
  *
  */
 public enum ApplicationUserPermission {
-	STORE_READ("store:read"),
-	STORE_WRITE("store:write");
+	CUSTOMER_READ("customer:read"),
+	CUSTOMER_WRITE("customer:write"),
+	EMPLOYEE_READ("employee:read"),
+	EMPLOYEE_WRITE("employee:write"),
+	ADMIN_READ("admin:read"),
+	ADMIN_WRITE("write");
 
 	private final String permission;
 	
