@@ -8,4 +8,6 @@ import com.maxback.security.models.User;
 
 public interface UserRepository extends JpaRepository<User, Long>{
 	Optional<User> findByUsername(String username);
+
+	boolean existsUserByUsername(String username);
 }

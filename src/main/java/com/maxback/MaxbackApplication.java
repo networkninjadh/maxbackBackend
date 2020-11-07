@@ -28,17 +28,17 @@ public class MaxbackApplication implements CommandLineRunner{
 
 	@Override
 	public void run(String... args) throws Exception {
-		
-		User userTwoUser = User.builder()
-				.username("admin")
-				.password(passwordEncoder.encode("password"))
-				.role("ROLE_" + ApplicationUserRole.ADMIN.name())
-				.isAccountNonExpired(true)
-				.isAccountNonLocked(true)
-				.isCredentialsNonExpired(true)
-				.isEnabled(true)
-				.build();
-		this.users.save(userTwoUser);
+//		
+//		User userTwoUser = User.builder()
+//				.username("admin")
+//				.password(passwordEncoder.encode("password"))
+//				.role("ROLE_" + ApplicationUserRole.ADMIN.name())
+//				.isAccountNonExpired(true)
+//				.isAccountNonLocked(true)
+//				.isCredentialsNonExpired(true)
+//				.isEnabled(true)
+//				.build();
+//		this.users.save(userTwoUser);
 	}
 
 }
