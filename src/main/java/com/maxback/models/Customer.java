@@ -14,11 +14,11 @@ import lombok.Data;
 
 @Entity
 @Data
-@Table(name = "profiles")
-public class Profile {
+@Table(name = "customers")
+public class Customer {
 	@Id
-	@Column(name = "profile_id")
-	private Long profileId;
+	@Column(name = "customer_id")
+	private Long customerId;
 	
 	@Column(name = "account_start_date")
 	private Date accountStartDate = new Date();
@@ -27,13 +27,13 @@ public class Profile {
 	
 	//current active user session
 	
-	@OneToOne(mappedBy = "profile", cascade = CascadeType.ALL, fetch = FetchType.LAZY, optional = false)
+	@OneToOne(mappedBy = "customer", cascade = CascadeType.ALL, fetch = FetchType.LAZY, optional = false)
 	private UserFiles userFiles;
 	
 	public void setUserFiles(UserFiles userFiles) {
 		if (userFiles == null) {
 			if (this.userFiles != null) {
-				this.userFiles.setProfile(this);
+				this.userFiles.setCustomer(this);
 			} else {
 				this.userFiles = userFiles;
 			}

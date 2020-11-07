@@ -1,0 +1,7 @@
+
+spring:
+  datasource:
+    url: postgres://oqoeaetjioavxe:3dad7bdf81d21bb0fc51332b9fbd492560651cd473fb920aae1c9719bea27a9d@ec2-18-235-109-97.compute-1.amazonaws.com:5432/d6s4l70bqslbhu
+    username: oqoeaetjioavxe
+    password: 3dad7bdf81d21bb0fc51332b9fbd492560651cd473fb920aae1c9719bea27a9d
+    
