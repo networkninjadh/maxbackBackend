@@ -36,8 +36,8 @@ public class JwtUserDetailsService implements UserDetailsService {
     
     public UserDetails createUserByUsername(String username, String password, String role) {
     	User newUser = User.builder()
-				.username("admin")
-				.password(passwordEncoder.encode("password"))
+				.username(username)
+				.password(passwordEncoder.encode(password))
 				.role("ROLE_" + role)
 				.isAccountNonExpired(true)
 				.isAccountNonLocked(true)
