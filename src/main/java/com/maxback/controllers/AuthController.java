@@ -38,6 +38,10 @@ public class AuthController {
      */
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     public UserDetails registerUser(@RequestBody JwtRequest authenticationRequest) throws Exception {
+    	
+    	if(this.userDetailsService.existsUsername(authenticationRequest.getUsername())) {
+    		return null;
+    	}
     	return userDetailsService.createUserByUsername(authenticationRequest.getUsername(), authenticationRequest.getPassword(), authenticationRequest.getRole());
     }
     
