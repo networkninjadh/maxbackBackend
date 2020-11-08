@@ -18,4 +18,6 @@ public class Session {
 	private Long employeeId;
 	
 	private Long customerId;
+	
+	private String openTokSessionId;
 }

@@ -44,7 +44,7 @@ public class AuthController {
      * 
      * @param userDetails
      */
-    @RequestMapping(value = "/delete", method = RequestMethod.POST)
+    @RequestMapping(value = "/delete", method = RequestMethod.DELETE)
     public void deleteUser(@AuthenticationPrincipal UserDetails userDetails) {
     	userDetailsService.deleteUserByUsername(userDetails.getUsername());
     }
