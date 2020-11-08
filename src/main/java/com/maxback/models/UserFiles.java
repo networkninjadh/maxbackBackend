@@ -26,6 +26,8 @@ public class UserFiles {
 	
 	private String profileImageUrl;
 	
+	
+	
 	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "customer_id")
 	@JsonIgnore

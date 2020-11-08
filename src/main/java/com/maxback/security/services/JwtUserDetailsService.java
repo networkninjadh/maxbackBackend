@@ -34,6 +34,14 @@ public class JwtUserDetailsService implements UserDetailsService {
             .orElseThrow(() -> new UsernameNotFoundException("Username: " + username + " not found"));
     }
     
+    public void deleteAllUsers() {
+    	this.users.deleteAll();
+    }
+    
+    public void deleteUserByUsername(String username) throws UsernameNotFoundException {
+    	this.users.deleteByUsername(username);
+    }
+    
     public UserDetails createUserByUsername(String username, String password, String role) {
     	User newUser = User.builder()
 				.username(username)

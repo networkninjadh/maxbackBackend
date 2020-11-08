@@ -6,6 +6,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,6 +30,24 @@ public class AuthController {
 
     @Autowired
     private JwtUserDetailsService userDetailsService;
+    
+    /**
+     * 
+     * @param userDetails
+     */
+    @RequestMapping(value = "/delete/all")
+    public void deleteAllUsers(@AuthenticationPrincipal UserDetails userDetails) {
+    	userDetailsService.deleteAllUsers();
+    }
+    
+    /**
+     * 
+     * @param userDetails
+     */
+    @RequestMapping(value = "/delete", method = RequestMethod.POST)
+    public void deleteUser(@AuthenticationPrincipal UserDetails userDetails) {
+    	userDetailsService.deleteUserByUsername(userDetails.getUsername());
+    }
     
     /**
      * 

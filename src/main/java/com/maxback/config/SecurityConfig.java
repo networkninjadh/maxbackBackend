@@ -81,7 +81,9 @@ class SecurityConfig extends WebSecurityConfigurerAdapter {
 			.antMatchers(HttpMethod.PUT,"/files/**" ).hasAuthority(ApplicationUserPermission.CUSTOMER_WRITE.getPermission())
 			.antMatchers(HttpMethod.GET,"/files/**" ).hasAuthority(ApplicationUserPermission.CUSTOMER_READ.getPermission())
 			.antMatchers(HttpMethod.DELETE,"/files/**" ).hasAuthority(ApplicationUserPermission.CUSTOMER_WRITE.getPermission())
-		
+			
+			.antMatchers(HttpMethod.DELETE, "/auth-api/delete/**").hasAuthority(ApplicationUserPermission.ADMIN_WRITE.getPermission())
+			
 			.antMatchers(
 					"/swagger-resources/**",
 					"/v2/api-docs",
