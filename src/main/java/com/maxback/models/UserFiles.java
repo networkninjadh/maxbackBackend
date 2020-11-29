@@ -1,5 +1,6 @@
 package com.maxback.models;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -23,13 +24,10 @@ public class UserFiles {
 	@Id
 	@GeneratedValue
 	private Long userFilesId;
-	
+	@Column(name = "profile_image_url")
 	private String profileImageUrl;
-	
-	
-	
-	@OneToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "customer_id")
+	@OneToOne(fetch = FetchType.LAZY, optional = false)
+	@JoinColumn(name = "customer_id", nullable = false)
 	@JsonIgnore
 	private Customer customer;
 }

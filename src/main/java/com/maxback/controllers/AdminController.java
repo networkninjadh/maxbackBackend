@@ -32,5 +32,11 @@ public class AdminController {
 	public List<Employee> getEmployees(@AuthenticationPrincipal UserDetails userDetails){
 		return employees.findAll();
 	}
+	
+	//session management
+	//get sessions
+	//delete all sessions
+	//delete session by id
+	//delete session by employee
 
 }

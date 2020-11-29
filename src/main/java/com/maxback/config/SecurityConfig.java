@@ -66,14 +66,27 @@ class SecurityConfig extends WebSecurityConfigurerAdapter {
 			 * These are a list of the permissions a user needs to have to access each endpoint admin can hit any endpoint admin will be a user on our side
 			 * I will make that there can be only one admin 
 			 */
-			
-			/**
-			 * Authentication for store api
+				/**
+			 * Admin API
 			 */
-			.antMatchers(HttpMethod.DELETE, "/test").hasAuthority(ApplicationUserPermission.ADMIN_WRITE.getPermission())
-			.antMatchers(HttpMethod.GET, "/test").hasAuthority(ApplicationUserPermission.ADMIN_READ.getPermission())
-			.antMatchers(HttpMethod.POST, "/test").hasAuthority(ApplicationUserPermission.ADMIN_WRITE.getPermission())
-			.antMatchers(HttpMethod.PUT, "/test").hasAuthority(ApplicationUserPermission.ADMIN_WRITE.getPermission())
+			.antMatchers(HttpMethod.DELETE, "/admin-api/**").hasAuthority(ApplicationUserPermission.ADMIN_WRITE.getPermission())
+			.antMatchers(HttpMethod.GET, "/admin-api/**").hasAuthority(ApplicationUserPermission.ADMIN_READ.getPermission())
+			.antMatchers(HttpMethod.POST, "/admin-api/**").hasAuthority(ApplicationUserPermission.ADMIN_WRITE.getPermission())
+			.antMatchers(HttpMethod.PUT, "/admin-api/**").hasAuthority(ApplicationUserPermission.ADMIN_WRITE.getPermission())
+			/**
+			 * Customer API
+			 */
+			.antMatchers(HttpMethod.DELETE, "/profile-api/**").hasAuthority(ApplicationUserPermission.CUSTOMER_WRITE.getPermission())
+			.antMatchers(HttpMethod.GET, "/profile-api/**").hasAuthority(ApplicationUserPermission.CUSTOMER_READ.getPermission())
+			.antMatchers(HttpMethod.POST, "/profile-api/**").hasAuthority(ApplicationUserPermission.CUSTOMER_WRITE.getPermission())
+			.antMatchers(HttpMethod.PUT, "/profile-api/**").hasAuthority(ApplicationUserPermission.CUSTOMER_WRITE.getPermission())
+			/**
+			 * Employee API
+			 */
+			.antMatchers(HttpMethod.DELETE, "/employee-api/**").hasAuthority(ApplicationUserPermission.EMPLOYEE_WRITE.getPermission())
+			.antMatchers(HttpMethod.GET, "/employee-api/**").hasAuthority(ApplicationUserPermission.EMPLOYEE_READ.getPermission())
+			.antMatchers(HttpMethod.POST, "/employee-api/**").hasAuthority(ApplicationUserPermission.EMPLOYEE_WRITE.getPermission())
+			.antMatchers(HttpMethod.PUT, "/employee-api/**").hasAuthority(ApplicationUserPermission.EMPLOYEE_WRITE.getPermission())
 			/**
 			 * Aws File Controller authentication
 			 */

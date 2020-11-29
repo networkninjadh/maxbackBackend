@@ -14,10 +14,7 @@ public class Session {
 	@Id
 	@GeneratedValue
 	private Long sessionId;
-	
 	private Long employeeId;
-	
 	private Long customerId;
-	
 	private String openTokSessionId;
 }
