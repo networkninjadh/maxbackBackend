@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import org.slf4j.Logger;
@@ -29,7 +31,6 @@ import com.maxback.repositories.CustomerRepository;
 import com.maxback.repositories.EmployeeRepository;
 import com.maxback.services.AmazonClient;
 
-
 @RestController
 @RequestMapping("/files")
 public class AwsFileController {
@@ -43,6 +44,14 @@ public class AwsFileController {
 	
 	private static Logger log = LoggerFactory.getLogger(AmazonClient.class);
 
+	
+	/**
+	 * 
+	 * @param customerId
+	 * @param file
+	 * @param userDetails
+	 * @return
+	 */
 	@PostMapping("/customer-profile/profile-image/{customer_id}")
 	public Customer uploadProfileImg(@PathVariable(name = "customer_id") Long customerId, @RequestPart(value = "file") MultipartFile file, @AuthenticationPrincipal UserDetails userDetails) {
 		String fileKey = this.amazonClient.uploadFile(file);
@@ -51,6 +60,13 @@ public class AwsFileController {
 		return customers.save(me.get());
 	}
 	
+	/**
+	 * 
+	 * @param customerId
+	 * @param userDetails
+	 * @return
+	 * @throws IOException
+	 */
 	@GetMapping("/customer-profile/profile-image/{customer_id}")
 	public URL getProfileImg(@PathVariable(name = "customer_id") Long customerId, @AuthenticationPrincipal UserDetails userDetails) throws IOException {
 		Customer me = customers.findById(customerId).orElseThrow();
@@ -59,6 +75,49 @@ public class AwsFileController {
 		return amazonClient.getFileUrl(fileKey);
 	}
 	
+	/**
+	 * 
+	 * @param customerId
+	 * @param file
+	 * @param userDetails
+	 * @return
+	 */
+	@PostMapping("/customer-profile/customer/{customer_id}/recipts")
+	public Customer uploadRecipts(@PathVariable(name = "customer_id") Long customerId, @RequestPart(value = "file") MultipartFile file, @AuthenticationPrincipal UserDetails userDetails) {
+		String fileKey = this.amazonClient.uploadFile(file);
+		Optional<Customer> me = customers.findById(customerId);
+		me.get().getUserFiles().addRecipt(fileKey);
+		return customers.save(me.get());
+	}
+	
+	/**
+	 * 
+	 * @param customerId
+	 * @param userDetails
+	 * @return 
+	 */
+	@GetMapping("/customer-profile/customer/{customer_id}/recipts")
+	public List<URL> getCustomerReciepts(@PathVariable(name = "customer_id") Long customerId, @AuthenticationPrincipal UserDetails userDetails) {
+		Customer me = customers.findById(customerId).orElseThrow();
+		List<String> fileKeys = me.getUserFiles().getRecipts();
+		List<URL> urls = new ArrayList<URL>();
+		fileKeys.stream().forEach((fileKey) -> {
+			urls.add(amazonClient.getFileUrl(fileKey));
+		});
+		return urls;
+	}
+	
+	/**
+	 * Employee files
+	 */
+	
+	/**
+	 * 
+	 * @param employeeId
+	 * @param file
+	 * @param userDetails
+	 * @return
+	 */
 	@PostMapping("/employee-profile/profile-image/{employee_id}")
 	public String uploadEmployeeProfileImg(@PathVariable(name = "employee_id") Long employeeId, @RequestPart(value = "file") MultipartFile file, @AuthenticationPrincipal UserDetails userDetails) {
 		String link = this.amazonClient.uploadFile(file);
@@ -68,6 +127,12 @@ public class AwsFileController {
 		return link;
 	}
 	
+	/**
+	 * 
+	 * @param employeeId
+	 * @param userDetails
+	 * @return
+	 */
 	@GetMapping("/employee-profile/profile-image/{employee_id}")
 	public String getEmployeeProfileImg(@PathVariable(name = "employee_id") Long employeeId, @AuthenticationPrincipal UserDetails userDetails) {
 		Optional<Employee> me = employees.findById(employeeId);

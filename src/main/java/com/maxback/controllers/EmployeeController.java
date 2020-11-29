@@ -33,7 +33,7 @@ public class EmployeeController {
 	@Autowired
 	private SessionRepository sessions;
 	
-	@PostMapping("/new")
+	@PostMapping("/employee/new")
 	public Employee newEmployee(@RequestBody Employee employee, @AuthenticationPrincipal UserDetails userDetails) {
 		Employee me = new Employee();
 		me.setUsername(userDetails.getUsername());

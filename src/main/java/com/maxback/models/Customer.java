@@ -1,5 +1,6 @@
 package com.maxback.models;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 import javax.persistence.CascadeType;
@@ -26,20 +27,12 @@ public class Customer {
 	@Column(name = "customer_id")
 	private Long customerId;
 	@Column(name = "account_start_date")
-	private Date accountStartDate = new Date();
+	private LocalDate accountStartDate = LocalDate.now();
 	@Column(name = "username", nullable = false)
 	private String username;
 	@OneToOne(mappedBy = "customer", cascade = CascadeType.ALL, fetch = FetchType.LAZY, optional = false)
 	private UserFiles userFiles;
 	
-//	public void setUserFiles(UserFiles userFiles) {
-//		if (userFiles == null) {
-//			if (this.userFiles != null) {
-//				this.userFiles.setCustomer(this);
-//			} else {
-//				this.userFiles = userFiles;
-//			}
-//			this.userFiles = userFiles;
-//		}
-//	}
+	//customer posts
+
 }
