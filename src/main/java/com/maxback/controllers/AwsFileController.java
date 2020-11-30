@@ -97,6 +97,38 @@ public class AwsFileController {
 	 * @return 
 	 */
 	@GetMapping("/customer-profile/customer/{customer_id}/recipts")
+	public List<URL> getCustomerInsurance(@PathVariable(name = "customer_id") Long customerId, @AuthenticationPrincipal UserDetails userDetails) {
+		Customer me = customers.findById(customerId).orElseThrow();
+		List<String> fileKeys = me.getUserFiles().getRecipts();
+		List<URL> urls = new ArrayList<URL>();
+		fileKeys.stream().forEach((fileKey) -> {
+			urls.add(amazonClient.getFileUrl(fileKey));
+		});
+		return urls;
+	}
+	
+	/**
+	 * 
+	 * @param customerId
+	 * @param file
+	 * @param userDetails
+	 * @return
+	 */
+	@PostMapping("/customer-profile/customer/{customer_id}/insurance")
+	public Customer uploadInsurance(@PathVariable(name = "customer_id") Long customerId, @RequestPart(value = "file") MultipartFile file, @AuthenticationPrincipal UserDetails userDetails) {
+		String fileKey = this.amazonClient.uploadFile(file);
+		Optional<Customer> me = customers.findById(customerId);
+		me.get().getUserFiles().addInsurance(fileKey);
+		return customers.save(me.get());
+	}
+	
+	/**
+	 * 
+	 * @param customerId
+	 * @param userDetails
+	 * @return 
+	 */
+	@GetMapping("/customer-profile/customer/{customer_id}/insurance")
 	public List<URL> getCustomerReciepts(@PathVariable(name = "customer_id") Long customerId, @AuthenticationPrincipal UserDetails userDetails) {
 		Customer me = customers.findById(customerId).orElseThrow();
 		List<String> fileKeys = me.getUserFiles().getRecipts();
@@ -107,6 +139,101 @@ public class AwsFileController {
 		return urls;
 	}
 	
+	/**
+	 * 
+	 * @param customerId
+	 * @param file
+	 * @param userDetails
+	 * @return
+	 */
+	@PostMapping("/customer-profile/customer/{customer_id}/license")
+	public Customer uploadLicense(@PathVariable(name = "customer_id") Long customerId, @RequestPart(value = "file") MultipartFile file, @AuthenticationPrincipal UserDetails userDetails) {
+		String fileKey = this.amazonClient.uploadFile(file);
+		Optional<Customer> me = customers.findById(customerId);
+		me.get().getUserFiles().addLicense(fileKey);
+		return customers.save(me.get());
+	}
+	
+	/**
+	 * 
+	 * @param customerId
+	 * @param userDetails
+	 * @return 
+	 */
+	@GetMapping("/customer-profile/customer/{customer_id}/license")
+	public List<URL> getCustomerLicense(@PathVariable(name = "customer_id") Long customerId, @AuthenticationPrincipal UserDetails userDetails) {
+		Customer me = customers.findById(customerId).orElseThrow();
+		List<String> fileKeys = me.getUserFiles().getLicense();
+		List<URL> urls = new ArrayList<URL>();
+		fileKeys.stream().forEach((fileKey) -> {
+			urls.add(amazonClient.getFileUrl(fileKey));
+		});
+		return urls;
+	}
+	
+	/**
+	 * 
+	 * @param customerId
+	 * @param file
+	 * @param userDetails
+	 * @return
+	 */
+	@PostMapping("/customer-profile/customer/{customer_id}/other")
+	public Customer uploadOther(@PathVariable(name = "customer_id") Long customerId, @RequestPart(value = "file") MultipartFile file, @AuthenticationPrincipal UserDetails userDetails) {
+		String fileKey = this.amazonClient.uploadFile(file);
+		Optional<Customer> me = customers.findById(customerId);
+		me.get().getUserFiles().addOther(fileKey);
+		return customers.save(me.get());
+	}
+	
+	/**
+	 * 
+	 * @param customerId
+	 * @param userDetails
+	 * @return 
+	 */
+	@GetMapping("/customer-profile/customer/{customer_id}/other")
+	public List<URL> getCustomerOther(@PathVariable(name = "customer_id") Long customerId, @AuthenticationPrincipal UserDetails userDetails) {
+		Customer me = customers.findById(customerId).orElseThrow();
+		List<String> fileKeys = me.getUserFiles().getOther();
+		List<URL> urls = new ArrayList<URL>();
+		fileKeys.stream().forEach((fileKey) -> {
+			urls.add(amazonClient.getFileUrl(fileKey));
+		});
+		return urls;
+	}
+	
+	/**
+	 * 
+	 * @param customerId
+	 * @param file
+	 * @param userDetails
+	 * @return
+	 */
+	@PostMapping("/customer-profile/customer/{customer_id}/w2")
+	public Customer uploadw2(@PathVariable(name = "customer_id") Long customerId, @RequestPart(value = "file") MultipartFile file, @AuthenticationPrincipal UserDetails userDetails) {
+		String fileKey = this.amazonClient.uploadFile(file);
+		Optional<Customer> me = customers.findById(customerId);
+		me.get().getUserFiles().addW2Forms(fileKey);
+		return customers.save(me.get());
+	}
+	
+	/**
+	 * 
+	 * @param customerId
+	 * @param userDetails
+	 * @return 
+	 */
+	@GetMapping("/customer-profile/customer/{customer_id}/w2")
+	public List<URL> getCustomerW2(@PathVariable(name = "customer_id") Long customerId, @AuthenticationPrincipal UserDetails userDetails) {
+		Customer me = customers.findById(customerId).orElseThrow();
+		List<String> fileKeys = me.getUserFiles().getW2Forms();
+		List<URL> urls = new ArrayList<URL>();
+		fileKeys.stream().forEach((fileKey) -> {
+			urls.add(amazonClient.getFileUrl(fileKey));
+		});
+		return urls;
+	}
 	/**
 	 * Employee files
 	 */

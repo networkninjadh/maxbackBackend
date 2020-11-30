@@ -1,10 +1,11 @@
 package com.maxback.repositories;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 import com.maxback.models.Message;
-import com.maxback.models.MessageBoard;
 
-public interface MessageBoardRepository extends JpaRepository<MessageBoard, Long> {
+@Repository
+public interface MessageRepository extends JpaRepository<Message, Long>{
 
 }

@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -25,6 +26,9 @@ public class MessageBoard {
 	@Id
 	@GeneratedValue
 	private Long id;
+	
+	@Column(name = "admin")
+	private String adminUsername;
 	
 	@OneToMany(mappedBy = "messageBoard", cascade = CascadeType.ALL, orphanRemoval = true)
 	Set<Message> messages = new HashSet<Message>();
