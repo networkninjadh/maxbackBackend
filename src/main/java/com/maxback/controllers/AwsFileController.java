@@ -69,7 +69,7 @@ public class AwsFileController {
 	 */
 	@GetMapping("/customer-profile/profile-image/{customer_id}")
 	public URL getProfileImg(@PathVariable(name = "customer_id") Long customerId, @AuthenticationPrincipal UserDetails userDetails) throws IOException {
-		Customer me = customers.findById(customerId).orElseThrow();
+		Customer me = customers.findById(customerId).get();
 		String fileKey = me.getUserFiles().getProfileImageUrl();
 		File file = amazonClient.downloadFileFromS3(fileKey);
 		return amazonClient.getFileUrl(fileKey);
@@ -98,7 +98,7 @@ public class AwsFileController {
 	 */
 	@GetMapping("/customer-profile/customer/{customer_id}/recipts")
 	public List<URL> getCustomerInsurance(@PathVariable(name = "customer_id") Long customerId, @AuthenticationPrincipal UserDetails userDetails) {
-		Customer me = customers.findById(customerId).orElseThrow();
+		Customer me = customers.findById(customerId).get();
 		List<String> fileKeys = me.getUserFiles().getRecipts();
 		List<URL> urls = new ArrayList<URL>();
 		fileKeys.stream().forEach((fileKey) -> {
@@ -130,7 +130,7 @@ public class AwsFileController {
 	 */
 	@GetMapping("/customer-profile/customer/{customer_id}/insurance")
 	public List<URL> getCustomerReciepts(@PathVariable(name = "customer_id") Long customerId, @AuthenticationPrincipal UserDetails userDetails) {
-		Customer me = customers.findById(customerId).orElseThrow();
+		Customer me = customers.findById(customerId).get();
 		List<String> fileKeys = me.getUserFiles().getRecipts();
 		List<URL> urls = new ArrayList<URL>();
 		fileKeys.stream().forEach((fileKey) -> {
@@ -162,7 +162,7 @@ public class AwsFileController {
 	 */
 	@GetMapping("/customer-profile/customer/{customer_id}/license")
 	public List<URL> getCustomerLicense(@PathVariable(name = "customer_id") Long customerId, @AuthenticationPrincipal UserDetails userDetails) {
-		Customer me = customers.findById(customerId).orElseThrow();
+		Customer me = customers.findById(customerId).get();
 		List<String> fileKeys = me.getUserFiles().getLicense();
 		List<URL> urls = new ArrayList<URL>();
 		fileKeys.stream().forEach((fileKey) -> {
@@ -194,7 +194,7 @@ public class AwsFileController {
 	 */
 	@GetMapping("/customer-profile/customer/{customer_id}/other")
 	public List<URL> getCustomerOther(@PathVariable(name = "customer_id") Long customerId, @AuthenticationPrincipal UserDetails userDetails) {
-		Customer me = customers.findById(customerId).orElseThrow();
+		Customer me = customers.findById(customerId).get();
 		List<String> fileKeys = me.getUserFiles().getOther();
 		List<URL> urls = new ArrayList<URL>();
 		fileKeys.stream().forEach((fileKey) -> {
@@ -226,7 +226,7 @@ public class AwsFileController {
 	 */
 	@GetMapping("/customer-profile/customer/{customer_id}/w2")
 	public List<URL> getCustomerW2(@PathVariable(name = "customer_id") Long customerId, @AuthenticationPrincipal UserDetails userDetails) {
-		Customer me = customers.findById(customerId).orElseThrow();
+		Customer me = customers.findById(customerId).get();
 		List<String> fileKeys = me.getUserFiles().getW2Forms();
 		List<URL> urls = new ArrayList<URL>();
 		fileKeys.stream().forEach((fileKey) -> {
