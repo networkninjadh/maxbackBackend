@@ -39,7 +39,7 @@ public class MessageController {
 	@PostMapping("/messageboards/{message_board_id}/message/new")
 	public Message newMessage(@PathVariable(name = "message_board_id") Long messageBoardId, @RequestBody Message message, @AuthenticationPrincipal UserDetails userDetails) {
 		MessageBoard messageBoard = messageBoards.findById(messageBoardId)
-				.orElseThrow();
+				.get();
 		Message newMessage = new Message();
 		newMessage.setMessage(message.getMessage());
 		newMessage.setMessageBoard(messageBoard);
