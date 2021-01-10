@@ -46,7 +46,6 @@ public class AmazonClient {
 	
 	private static Logger log = LoggerFactory.getLogger(AmazonClient.class);
 
-	private final String endpointUrl = "arn:aws:s3:::maxback-files";
 	private final String bucketName = "maxback-files";
 	private final String accessKey = "AKIAIHAK3HZSCR5VCS5A";
 	private final String secretKey = "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";
@@ -63,7 +62,6 @@ public class AmazonClient {
 			.withRegion(Regions.US_EAST_2)
 			.build();
 	}
-	//us-east-1
 	
 	private File convertMultiPartToFile(MultipartFile file) throws IOException {
 		File convFile = new File(file.getOriginalFilename());

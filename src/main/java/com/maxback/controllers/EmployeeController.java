@@ -34,7 +34,7 @@ public class EmployeeController {
 	private SessionRepository sessions;
 	
 	@PostMapping("/employee/new")
-	public Employee newEmployee(@RequestBody Employee employee, @AuthenticationPrincipal UserDetails userDetails) {
+	public Employee newEmployee(@AuthenticationPrincipal UserDetails userDetails) {
 		Employee me = new Employee();
 		me.setUsername(userDetails.getUsername());
 		return employees.save(me);
@@ -54,6 +54,15 @@ public class EmployeeController {
 			return "Employee deleted";
 		}
 		else return "Employee not deleted";
+	}
+	
+	@PostMapping("/employee/{employee_id}/session/new/customer/{customer_id}/")
+	public Session newSession(@PathVariable(name = "employee_id") Long employeeId, @PathVariable(name = "customer_id") Long customerId, @AuthenticationPrincipal UserDetails userDetails) throws OpenTokException {
+		Session newSession = new Session();
+		newSession.setCustomerId(customerId);
+		newSession.setEmployeeId(employeeId);
+		newSession.setOpenTokSessionId(videoStream.createSession(customerId, employeeId).getOpenTokSessionId());
+		return sessions.save(newSession);
 	}
 	
 	@GetMapping("/employee/token")

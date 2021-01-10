@@ -90,10 +90,16 @@ class SecurityConfig extends WebSecurityConfigurerAdapter {
 			/**
 			 * Aws File Controller authentication
 			 */
-			.antMatchers(HttpMethod.POST,"/files/**" ).hasAuthority(ApplicationUserPermission.CUSTOMER_WRITE.getPermission())
-			.antMatchers(HttpMethod.PUT,"/files/**" ).hasAuthority(ApplicationUserPermission.CUSTOMER_WRITE.getPermission())
-			.antMatchers(HttpMethod.GET,"/files/**" ).hasAuthority(ApplicationUserPermission.CUSTOMER_READ.getPermission())
-			.antMatchers(HttpMethod.DELETE,"/files/**" ).hasAuthority(ApplicationUserPermission.CUSTOMER_WRITE.getPermission())
+			.antMatchers(HttpMethod.POST,"/files/customer-profile/**" ).hasAuthority(ApplicationUserPermission.CUSTOMER_WRITE.getPermission())
+			.antMatchers(HttpMethod.PUT,"/files/customer-profile/**" ).hasAuthority(ApplicationUserPermission.CUSTOMER_WRITE.getPermission())
+			.antMatchers(HttpMethod.GET,"/files/customer-profile/**" ).hasAuthority(ApplicationUserPermission.CUSTOMER_READ.getPermission())
+			.antMatchers(HttpMethod.DELETE,"/files/customer-profile/**" ).hasAuthority(ApplicationUserPermission.CUSTOMER_WRITE.getPermission())
+			
+			.antMatchers(HttpMethod.POST,"/files/employee-profile/**" ).hasAuthority(ApplicationUserPermission.CUSTOMER_WRITE.getPermission())
+			.antMatchers(HttpMethod.PUT,"/files/employee-profile/**" ).hasAuthority(ApplicationUserPermission.CUSTOMER_WRITE.getPermission())
+			.antMatchers(HttpMethod.GET,"/files/employee-profile/**" ).hasAuthority(ApplicationUserPermission.CUSTOMER_READ.getPermission())
+			.antMatchers(HttpMethod.DELETE,"/files/employee-profile/**" ).hasAuthority(ApplicationUserPermission.CUSTOMER_WRITE.getPermission())
+			
 			/**
 			 * Message Controller
 			 */
