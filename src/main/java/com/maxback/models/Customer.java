@@ -34,5 +34,6 @@ public class Customer {
 	private UserFiles userFiles;
 	
 	//customer posts
+	//message boards they've posted on
 
 }
