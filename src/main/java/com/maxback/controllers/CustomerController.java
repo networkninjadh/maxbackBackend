@@ -41,6 +41,13 @@ public class CustomerController {
 		return customer;
 	}
 	
+	//@PostMapping("/customer/info")
+	//public Customer setCustomerInfo(@AuthenticationPrincipal UserDetails userDetails) {
+		//email
+		//contact num
+		//address
+		//full name
+	//}
 	@GetMapping("/customer/{customer_id}")
 	public Customer getProfile(@PathVariable(name = "customer_id") Long customerId, @AuthenticationPrincipal UserDetails userDetails) {
 		Optional<Customer> myProfile = customers.findById(customerId);

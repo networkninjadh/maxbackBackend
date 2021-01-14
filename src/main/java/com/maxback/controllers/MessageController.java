@@ -42,6 +42,7 @@ public class MessageController {
 				.get();
 		Message newMessage = new Message();
 		newMessage.setMessage(message.getMessage());
+		newMessage.setTitle(message.getTitle());
 		newMessage.setMessageBoard(messageBoard);
 		newMessage.setPosterUsername(userDetails.getUsername());
 		messageBoard.addMessage(newMessage);

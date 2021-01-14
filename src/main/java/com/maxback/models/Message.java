@@ -11,6 +11,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
+import org.joda.time.LocalDate;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.AllArgsConstructor;
@@ -34,6 +36,10 @@ public class Message {
 	@Column(name = "username")
 	private String posterUsername;
 	@Column(name = "time_posted")
+	LocalDate timePosted = LocalDate.now();
+	@Column(name = "title")
+	private String title;
+	@Column(name = "message")
 	private String message;
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JsonIgnore
