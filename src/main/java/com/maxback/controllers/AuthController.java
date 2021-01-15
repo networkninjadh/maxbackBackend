@@ -57,12 +57,14 @@ public class AuthController {
      * @throws Exception
      */
     @RequestMapping(value = "/register", method = RequestMethod.POST)
-    public UserDetails registerUser(@RequestBody JwtRequest authenticationRequest) throws Exception {
+    public ResponseEntity<?> registerUser(@RequestBody JwtRequest authenticationRequest) throws Exception {
     	
     	if(this.userDetailsService.existsUsername(authenticationRequest.getUsername())) {
     		throw new AccessDeniedException("This username has already been created");
     	}
-    	return userDetailsService.createUserByUsername(authenticationRequest.getUsername(), authenticationRequest.getPassword(), authenticationRequest.getRole());
+    	final UserDetails userDetails = userDetailsService.createUserByUsername(authenticationRequest.getUsername(), authenticationRequest.getPassword(), authenticationRequest.getRole());
+    	final String token = jwtTokenUtil.generateToken(userDetails);
+    	return ResponseEntity.ok(new JwtResponse(token));
     }
     
     /**
