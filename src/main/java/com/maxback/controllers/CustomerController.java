@@ -2,6 +2,7 @@ package com.maxback.controllers;
 
 import java.util.Optional;
 
+import org.jboss.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -30,17 +31,25 @@ public class CustomerController {
 	private SessionRepository sessions;
 	@Autowired
 	private CustomerRepository customers;
-	
+	private final Logger log = Logger.getLogger(CustomerController.class);
 	@PostMapping("/customer/new")
 	public Customer createProfile(@AuthenticationPrincipal UserDetails userDetails, @RequestBody Customer newCustomer) {
+		
+		log.info("Logging info");
+		log.info(userDetails.getUsername());
 		Customer customer = new Customer();
+		log.info("Create customer on server");
 		UserFiles files = new UserFiles();
+		log.info("Create customer files on server");
 		files.setCustomer(customer);
+		log.info("Set the relationship");
 		customer.setUserFiles(files);
 		customer.setUsername(userDetails.getUsername());
+		log.info("use the newCustomer passed in from endpoint");
 		customer.setEmail(newCustomer.getEmail());
 		customer.setAddress(newCustomer.getAddress());
 		customer.setPhone(newCustomer.getPhone());
+		log.info("save the customer to the database");
 		customers.save(customer);
 		return customer;
 	}
