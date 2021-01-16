@@ -30,6 +30,12 @@ public class Customer {
 	private LocalDate accountStartDate = LocalDate.now();
 	@Column(name = "username", nullable = false)
 	private String username;
+	@Column(name = "email", nullable = false)
+	private String email;
+	@Column(name = "phone", nullable = false)
+	private String phone;
+	@Column(name = "address")
+	private String address;
 	@OneToOne(mappedBy = "customer", cascade = CascadeType.ALL, fetch = FetchType.LAZY, optional = false)
 	private UserFiles userFiles;
 	

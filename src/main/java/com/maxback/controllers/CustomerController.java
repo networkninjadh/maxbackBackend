@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -31,12 +32,15 @@ public class CustomerController {
 	private CustomerRepository customers;
 	
 	@PostMapping("/customer/new")
-	public Customer createProfile(@AuthenticationPrincipal UserDetails userDetails) {
+	public Customer createProfile(@AuthenticationPrincipal UserDetails userDetails, @RequestBody Customer newCustomer) {
 		Customer customer = new Customer();
 		UserFiles files = new UserFiles();
 		files.setCustomer(customer);
 		customer.setUserFiles(files);
 		customer.setUsername(userDetails.getUsername());
+		customer.setEmail(newCustomer.getEmail());
+		customer.setAddress(newCustomer.getAddress());
+		customer.setPhone(newCustomer.getPhone());
 		customers.save(customer);
 		return customer;
 	}
