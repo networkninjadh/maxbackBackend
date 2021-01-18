@@ -88,7 +88,7 @@ public class AwsFileController {
 	 * @param userDetails
 	 * @return
 	 */
-	@PostMapping("/customer-profile/customer/{customer_id}/recipts")
+	@PostMapping("/customer-profile/customer/recipts/{customer_id}")
 	public Customer uploadRecipts(@PathVariable(name = "customer_id") Long customerId, @RequestPart(value = "file") MultipartFile file, @AuthenticationPrincipal UserDetails userDetails) {
 		String fileKey = this.amazonClient.uploadFile(file);
 		Optional<Customer> me = customers.findById(customerId);
@@ -102,7 +102,7 @@ public class AwsFileController {
 	 * @param userDetails
 	 * @return 
 	 */
-	@GetMapping("/customer-profile/customer/{customer_id}/recipts")
+	@GetMapping("/customer-profile/customer/recipts/{customer_id}")
 	public List<URL> getCustomerInsurance(@PathVariable(name = "customer_id") Long customerId, @AuthenticationPrincipal UserDetails userDetails) {
 		Customer me = customers.findById(customerId).get();
 		List<String> fileKeys = me.getUserFiles().getRecipts();
@@ -120,7 +120,7 @@ public class AwsFileController {
 	 * @param userDetails
 	 * @return
 	 */
-	@PostMapping("/customer-profile/customer/{customer_id}/insurance")
+	@PostMapping("/customer-profile/customer/insurance/{customer_id}")
 	public Customer uploadInsurance(@PathVariable(name = "customer_id") Long customerId, @RequestPart(value = "file") MultipartFile file, @AuthenticationPrincipal UserDetails userDetails) {
 		String fileKey = this.amazonClient.uploadFile(file);
 		Optional<Customer> me = customers.findById(customerId);
@@ -134,7 +134,7 @@ public class AwsFileController {
 	 * @param userDetails
 	 * @return 
 	 */
-	@GetMapping("/customer-profile/customer/{customer_id}/insurance")
+	@GetMapping("/customer-profile/customer/insurance/{customer_id}")
 	public List<URL> getCustomerReciepts(@PathVariable(name = "customer_id") Long customerId, @AuthenticationPrincipal UserDetails userDetails) {
 		Customer me = customers.findById(customerId).get();
 		List<String> fileKeys = me.getUserFiles().getRecipts();
@@ -152,7 +152,7 @@ public class AwsFileController {
 	 * @param userDetails
 	 * @return
 	 */
-	@PostMapping("/customer-profile/customer/{customer_id}/license")
+	@PostMapping("/customer-profile/customer/license/{customer_id}")
 	public Customer uploadLicense(@PathVariable(name = "customer_id") Long customerId, @RequestPart(value = "file") MultipartFile file, @AuthenticationPrincipal UserDetails userDetails) {
 		String fileKey = this.amazonClient.uploadFile(file);
 		Optional<Customer> me = customers.findById(customerId);
@@ -166,7 +166,7 @@ public class AwsFileController {
 	 * @param userDetails
 	 * @return 
 	 */
-	@GetMapping("/customer-profile/customer/{customer_id}/license")
+	@GetMapping("/customer-profile/customer/license/{customer_id}")
 	public List<URL> getCustomerLicense(@PathVariable(name = "customer_id") Long customerId, @AuthenticationPrincipal UserDetails userDetails) {
 		Customer me = customers.findById(customerId).get();
 		List<String> fileKeys = me.getUserFiles().getLicense();
@@ -184,7 +184,7 @@ public class AwsFileController {
 	 * @param userDetails
 	 * @return
 	 */
-	@PostMapping("/customer-profile/customer/{customer_id}/other")
+	@PostMapping("/customer-profile/customer/other/{customer_id}")
 	public Customer uploadOther(@PathVariable(name = "customer_id") Long customerId, @RequestPart(value = "file") MultipartFile file, @AuthenticationPrincipal UserDetails userDetails) {
 		String fileKey = this.amazonClient.uploadFile(file);
 		Optional<Customer> me = customers.findById(customerId);
@@ -198,7 +198,7 @@ public class AwsFileController {
 	 * @param userDetails
 	 * @return 
 	 */
-	@GetMapping("/customer-profile/customer/{customer_id}/other")
+	@GetMapping("/customer-profile/customer/other/{customer_id}")
 	public List<URL> getCustomerOther(@PathVariable(name = "customer_id") Long customerId, @AuthenticationPrincipal UserDetails userDetails) {
 		Customer me = customers.findById(customerId).get();
 		List<String> fileKeys = me.getUserFiles().getOther();
@@ -216,7 +216,7 @@ public class AwsFileController {
 	 * @param userDetails
 	 * @return
 	 */
-	@PostMapping("/customer-profile/customer/{customer_id}/w2")
+	@PostMapping("/customer-profile/customer/w2/{customer_id}")
 	public Customer uploadw2(@PathVariable(name = "customer_id") Long customerId, @RequestPart(value = "file") MultipartFile file, @AuthenticationPrincipal UserDetails userDetails) {
 		String fileKey = this.amazonClient.uploadFile(file);
 		Optional<Customer> me = customers.findById(customerId);
@@ -230,7 +230,7 @@ public class AwsFileController {
 	 * @param userDetails
 	 * @return 
 	 */
-	@GetMapping("/customer-profile/customer/{customer_id}/w2")
+	@GetMapping("/customer-profile/customer/w2/{customer_id}")
 	public List<URL> getCustomerW2(@PathVariable(name = "customer_id") Long customerId, @AuthenticationPrincipal UserDetails userDetails) {
 		Customer me = customers.findById(customerId).get();
 		List<String> fileKeys = me.getUserFiles().getW2Forms();
