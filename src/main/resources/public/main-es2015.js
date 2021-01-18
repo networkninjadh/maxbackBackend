@@ -435,7 +435,7 @@ HomeComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComp
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CONSTANTS", function() { return CONSTANTS; });
 const CONSTANTS = {
-    PRODUCTION_BASE_URL: `https://maxbac-demo.herokuapp.com/`,
+    PRODUCTION_BASE_URL: `https://maxbac-demo.herokuapp.com`,
     REGISTER: `auth-api/register`,
     LOG_IN: `auth-api/signin`,
     UPLOAD_PROFILE_IMAGE: `files/customer-profile/profile-image/`,
