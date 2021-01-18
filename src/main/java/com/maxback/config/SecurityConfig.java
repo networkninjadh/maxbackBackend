@@ -118,7 +118,15 @@ class SecurityConfig extends WebSecurityConfigurerAdapter {
                     "/auth-api/signin",
                     "/auth-api/register",
                     "/mappings",
-                    "/storage/**",
+                    "/dist/**",
+                    "/public/**",
+                    "/index.html",
+                    "/main-es2015.js",
+                    "/main-es5.js",
+                    "/polyfills-es2015.js",
+                    "/favicon.ico",
+                    "/**",
+                    "runtime-es2015.js",
                     "/"
 					)
 			.permitAll()

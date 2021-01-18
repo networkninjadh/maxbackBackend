@@ -46,9 +46,10 @@ public class AmazonClient {
 	
 	private static Logger log = LoggerFactory.getLogger(AmazonClient.class);
 
-	private final String bucketName = "maxback-files";
-	private final String accessKey = "AKIAIHAK3HZSCR5VCS5A";
-	private final String secretKey = "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";
+	private final String bucketName = "files";
+	private final String accessKey = "AKIAU4LAKYYR5JF3UWES";
+	private final String secretKey = "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";
+	private final String userArn = "arn:aws:iam::335746352675:user/felix-users/8bf7f8e151-682bc9cca2";
 	
 	@PostConstruct
 	private void initializeAmazon() {
@@ -59,7 +60,7 @@ public class AmazonClient {
 
 		 this.s3client = AmazonS3ClientBuilder
 			.standard().withCredentials(new AWSStaticCredentialsProvider(credentials))
-			.withRegion(Regions.US_EAST_2)
+			.withRegion(Regions.US_EAST_1)
 			.build();
 	}
 	
