@@ -1460,11 +1460,11 @@
             "folder": "file:///root/Documents/workspace-spring-tool-suite-4-4.7.1.RELEASE/Maxback/src/main/resources/public/maxbackFrontendAngular",
             "backupPath": "/root/Documents/workspace-spring-tool-suite-4-4.7.1.RELEASE/Maxback/src/main/resources/public/Backups/ccb4d8185075752b656e7411162c89b7",
             "uiState": {
-                "mode": 0,
-                "x": -289,
+                "mode": 1,
+                "x": 0,
                 "y": 37,
-                "width": 1024,
-                "height": 768
+                "width": 1080,
+                "height": 1833
             }
         },
         "openedWindows": []
