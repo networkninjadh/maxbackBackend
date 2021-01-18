@@ -53,17 +53,16 @@ public class CustomerController {
 		customers.save(customer);
 		return customer;
 	}
-	
-	//@PostMapping("/customer/info")
-	//public Customer setCustomerInfo(@AuthenticationPrincipal UserDetails userDetails) {
-		//email
-		//contact num
-		//address
-		//full name
-	//}
 	@GetMapping("/customer/{customer_id}")
-	public Customer getProfile(@PathVariable(name = "customer_id") Long customerId, @AuthenticationPrincipal UserDetails userDetails) {
+	public Customer getProfileById(@PathVariable(name = "customer_id") Long customerId, @AuthenticationPrincipal UserDetails userDetails) {
 		Optional<Customer> myProfile = customers.findById(customerId);
+		return myProfile.get();
+	}
+	
+	@GetMapping("/customer")
+	public Customer getProfile(@AuthenticationPrincipal UserDetails userDetails) {
+		log.info("inside customer get");
+		Optional<Customer> myProfile = customers.findByUsername(userDetails.getUsername());
 		return myProfile.get();
 	}
 	

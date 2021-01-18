@@ -30,9 +30,9 @@ public class Customer {
 	private LocalDate accountStartDate = LocalDate.now();
 	@Column(name = "username", nullable = false)
 	private String username;
-	@Column(name = "email", nullable = false)
+	@Column(name = "email")
 	private String email;
-	@Column(name = "phone", nullable = false)
+	@Column(name = "phone")
 	private String phone;
 	@Column(name = "address")
 	private String address;

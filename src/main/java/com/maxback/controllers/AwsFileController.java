@@ -1,6 +1,7 @@
 package com.maxback.controllers;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
@@ -43,7 +44,8 @@ public class AwsFileController {
 	private EmployeeRepository employees;
 	
 	private static Logger log = LoggerFactory.getLogger(AmazonClient.class);
-
+	
+	File profilePhoto;
 	
 	/**
 	 * 
@@ -51,13 +53,16 @@ public class AwsFileController {
 	 * @param file
 	 * @param userDetails
 	 * @return
+	 * @throws IOException 
 	 */
 	@PostMapping("/customer-profile/profile-image/{customer_id}")
-	public Customer uploadProfileImg(@PathVariable(name = "customer_id") Long customerId, @RequestPart(value = "file") MultipartFile file, @AuthenticationPrincipal UserDetails userDetails) {
+	public File uploadProfileImg(@PathVariable(name = "customer_id") Long customerId, @RequestPart(value = "file") MultipartFile file, @AuthenticationPrincipal UserDetails userDetails) throws IOException {
+		profilePhoto = convertMultiPartToFile(file);
 		String fileKey = this.amazonClient.uploadFile(file);
 		Optional<Customer> me = customers.findById(customerId);
 		me.get().getUserFiles().setProfileImageUrl(fileKey);
-		return customers.save(me.get());
+		customers.save(me.get());
+		return profilePhoto;
 	}
 	
 	/**
@@ -68,11 +73,12 @@ public class AwsFileController {
 	 * @throws IOException
 	 */
 	@GetMapping("/customer-profile/profile-image/{customer_id}")
-	public URL getProfileImg(@PathVariable(name = "customer_id") Long customerId, @AuthenticationPrincipal UserDetails userDetails) throws IOException {
+	public File getProfileImg(@PathVariable(name = "customer_id") Long customerId, @AuthenticationPrincipal UserDetails userDetails) throws IOException {
 		Customer me = customers.findById(customerId).get();
 		String fileKey = me.getUserFiles().getProfileImageUrl();
 		File file = amazonClient.downloadFileFromS3(fileKey);
-		return amazonClient.getFileUrl(fileKey);
+		//return amazonClient.getFileUrl(fileKey);
+		return profilePhoto;
 	}
 	
 	/**
@@ -264,5 +270,13 @@ public class AwsFileController {
 	public String getEmployeeProfileImg(@PathVariable(name = "employee_id") Long employeeId, @AuthenticationPrincipal UserDetails userDetails) {
 		Optional<Employee> me = employees.findById(employeeId);
 		return me.get().getProfileImageUrl();
+	}
+	
+	private File convertMultiPartToFile(MultipartFile file) throws IOException {
+		File convFile = new File(file.getOriginalFilename());
+		FileOutputStream fos = new FileOutputStream(convFile);
+		fos.write(file.getBytes());
+		fos.close();
+		return convFile;
 	}
 }
